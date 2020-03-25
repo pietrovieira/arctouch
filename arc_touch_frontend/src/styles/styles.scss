@@ -1,0 +1,11 @@
+@import "tailwind.css";
+
+body {
+  button{
+    outline: none !important;
+  }
+  .bg-loader,
+  footer.bg-footer {
+    background: #55565a;
+  }
+}

@@ -19,14 +19,14 @@ default: &default
 
 development:
   <<: *default
-  database: arc_touch_api_development
+  database: arc_touch_movies
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: arc_touch_api_test
+# test:
+#   <<: *default
+#   database: arc_touch_movies
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -47,8 +47,8 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: arc_touch_api_production
-  username: arc_touch_api
-  password: <%= ENV['ARC_TOUCH_API_DATABASE_PASSWORD'] %>
+# production:
+#   <<: *default
+#   database: arc_touch_movies
+#   username: arc_touch_movies
+#   password: <%= ENV['ARC_TOUCH_API_DATABASE_PASSWORD'] %>

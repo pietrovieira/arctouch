@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get '/movie/upcoming', to: 'movie#upcoming'
+  get '/genre/movie/list', to: 'movie#genre_movie_list'
+  get '/movie/:movie_id', to: 'movie#detail'
+  get '/search/movie', to: 'movie#search'
 end
