@@ -1,29 +1,30 @@
 import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 
 import Header from "../components/header";
 import Footer from "../components/footer";
 
 const Movies = () => {
+  
   const dispatch = useDispatch();
 
   const [searchQuery,setSearchQuery] = React.useState(null);
 
   const { movies, genre, loaded } = useSelector(state => state.movie);
-
   React.useEffect(() => {
     //start
     dispatch({
       type: "@movie/GET_UPCOMING"
     });
-  }, []);
+  },[]);
 
-  const handleChange = (value) => {
-    if ( value.target.value !== null && value.target.value != '' )
+  const handleChange = (event) => {
+    if ( event.target.value !== null && event.target.value !== '' )
     {
-      setSearchQuery(value.target.value);
+      setSearchQuery(event.target.value);
     }else{
       setSearchQuery('');
     }
@@ -42,7 +43,6 @@ const Movies = () => {
       <section className="flex flex-col justify-between">
         <Header />
         <div className="h-full flex flex-col items-center">
-        {loaded && (
           <div className="w-full max-w-md my-6">
             <div className="flex border-b border-b-2 border-orange-500 py-2">
               <input
@@ -50,38 +50,38 @@ const Movies = () => {
                 type="text"
                 placeholder="Movie name"
                 aria-label="Movie name"
+                disabled={!loaded}
                 onChange={handleChange}
               />
             </div>
           </div>
-        )}
           <div className="mx-auto mb-10">
             {loaded && (
-              <table style={{width: '1300px' }} className="w-full">
+              <table style={{width: '1200px' }} className="w-full">
                 <thead>
                   <tr>
-                    <th className="px-4 py-2" style={{ width: "150px" }}>
+                    <th className="px-4 py-2 text-center" style={{ width: "80px" }}>
                       Poster/Backdrop
                     </th>
-                    <th className="px-4 py-2">Name</th>
-                    <th className="px-4 py-2">Genre</th>
-                    <th className="px-4 py-2">Release Date</th>
-                    <th className="px-4 py-2">&nbsp;</th>
+                    <th className="px-4 py-2 text-left" style={{ width: '125px' }}>Name</th>
+                    <th className="px-4 py-2 text-left" style={{ width: '125px' }}>Genre</th>
+                    <th className="px-4 py-2 text-left" style={{ width: '100px' }}>Release Date</th>
+                    <th className="px-4 py-2 text-center" style={{ width: '100px' }}>&nbsp;</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {movies &&
+                  {movies.length > 0 &&
                     movies.map(movie => (
                       <tr key={movie.id} className="bg-gray-100">
-                        <td className="border px-4 py-2">
+                        <td className="border px-4 py-2 text-center">
                           <img
                             src={movie.poster_path}
                             className="w-full max-w-img"
                             alt={movie.title}
                           />
                         </td>
-                        <td className="border px-4 py-2">{movie.title}</td>
-                        <td className="border px-4 py-2">
+                        <td className="border px-4 py-2 text-left">{movie.title}</td>
+                        <td className="border px-4 py-2 text-left">
                           {movie.genre_ids.map((g, i) => (
                             <label key={g.id}>
                               {i > 0 ? ", " : ""}
@@ -89,12 +89,11 @@ const Movies = () => {
                             </label>
                           ))}
                         </td>
-                        <td className="border px-4 py-2">
+                        <td className="border px-4 py-2 text-center">
                           {movie.release_date}
                         </td>
                         <td
-                          className="border px-4 py-2"
-                          style={{ width: "150px" }}
+                          className="border px-4 py-2 text-center"
                         >
                           <Link
                             to={`/movie/${movie.id}`}

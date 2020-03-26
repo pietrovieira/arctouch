@@ -3,13 +3,11 @@ import React from "react";
 import Header from "../components/header";
 import Footer from "../components/footer";
 
-import { Link } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
 
 const MovieDetail = ({ history, match }) => {
   const dispatch = useDispatch();
-  const { movieDetail: detail, genre } = useSelector(state => state.movie);
+  const { movieDetail: detail } = useSelector(state => state.movie);
 
   const { params } = match;
 
@@ -20,9 +18,7 @@ const MovieDetail = ({ history, match }) => {
       type: "@movie/SHOW_DETAIL",
       payload: id
     });
-  }, []);
-
-  // console.log("match", id, detail, match);
+  },[]);
 
   return (
     <>
@@ -82,7 +78,7 @@ const MovieDetail = ({ history, match }) => {
               </div>
             )}
             <a
-              onClick={() => history.goBack()}
+              href="/"
               className="flex-shrink-0 mt-8 float-right inline-block bg-orange-500 hover:bg-orange-700 border-orange-500 hover:border-orange-700 text-sm border-4 text-white py-1 px-2 rounded"
             >
               Voltar
